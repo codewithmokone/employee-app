@@ -22,7 +22,7 @@ const getDatafromLS = () => {
 const EmployeeForm = () => {
 
   const [employees, setEmployees] = useState(getDatafromLS());
-  
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [idnumber, setIdNumber] = useState('');
@@ -30,7 +30,7 @@ const EmployeeForm = () => {
   const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
   const [image, setImage] = useState('');
-
+  console.log(employees);
 
   /* submit button section */
   const handleAddEmployeeSubmit = (event) => {
@@ -59,7 +59,7 @@ const EmployeeForm = () => {
   /* edit button section */
   const UpdateEmployee = () => {
 
-    let employee = {
+    let editedEmployee = {
       name,
       surname,
       idnumber,
@@ -69,14 +69,24 @@ const EmployeeForm = () => {
       image
     };
 
-    setEmployees([...employees, employee]);
-    setName(employee.name);
-    setSurname(employee.surname);
-    setIdNumber(employee.idnumber);
-    setPosition(employee.position);
-    setContact(employee.contact);
-    setEmail(employee.email);
+    setName(name);
+    setSurname(surname);
+    setIdNumber(idnumber);
+    setPosition(position);
+    setContact(contact);
+    setEmail(email);
     //setImage(employee.image);
+
+    setEmployees(employees.map(employee => {
+      return employee.idnumber === idnumber ? editedEmployee : employee
+    }))
+
+    setName('');
+    setSurname('');
+    setIdNumber('');
+    setPosition('');
+    setContact('');
+    setEmail('');
   }
 
 
@@ -99,7 +109,7 @@ const EmployeeForm = () => {
   const handleSearch = (name) => {
     const searchData = JSON.parse(localStorage.getItem('employees'));
 
-    setSearchQuery (
+    setSearchQuery(
       searchData.filter(index => {
         return index.name === name
       })
@@ -110,8 +120,8 @@ const EmployeeForm = () => {
 
   /* delete button section */
   const deleteEmployee = (idnumber) => {
-    const filteredEmployees = employees.filter((element, index) => {
-      return element.idnumber !== idnumber
+    const filteredEmployees = employees.filter(employee => {
+      return employee.idnumber !== idnumber
     })
     setEmployees(filteredEmployees);
   };
@@ -148,7 +158,9 @@ const EmployeeForm = () => {
             <label>Email:</label>
             <input type="email" className='form-control' onChange={(e) => setEmail(e.target.value)} id="email" value={email} required />
             <br></br>
+            
             <label>Upload Image:</label>
+            <img src="" alt="" />
             <input type="file" className='form-control' onChange={(e) => setImage(e.target.value)} id="file" value={image} required />
             <br></br>
             <button type="submit" className='btn-submit'>ADD</button>
@@ -159,31 +171,18 @@ const EmployeeForm = () => {
         <div className='view-container'>
           {employees.length > 0 && <>
             <div className='table-responsive'>
-
-              <Search onSearch={handleSearch} />
-
-              <table className='table'>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>ID #</th>
-                    <th>Email</th>
-                    <th>Position</th>
-                    <th>Contact</th>
-                    <th>Image</th>
-                    <th>Modify</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>
-                <tbody id="view-tag">
+              <div className="first">
+                <Search onSearch={handleSearch} className="search" />
+              </div>
+              <div className="second">
+                <div id="view-tag">
                   {searchQuery.length ?
                     <View employees={searchQuery} deleteEmployee={deleteEmployee} handleEditSubmit={handleEditSubmit} handleSearch={handleSearch} />
                     :
                     <View employees={employees} deleteEmployee={deleteEmployee} handleEditSubmit={handleEditSubmit} handleSearch={handleSearch} />
                   }
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
             <button className='btn-remove-all' onClick={() => setEmployees([])}> Remove All </button>
           </>}

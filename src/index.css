@@ -92,14 +92,6 @@
   }
 
 
-
-
-
-
-
-
-
-
 /* ----- Employee Form section ----- */
 .login-container {
     width: 600px;
@@ -135,9 +127,9 @@
     font-weight: bold;
 }
 
-.wrapper .main{
+.main{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 5px;
     align-items: center;
 }
@@ -185,11 +177,6 @@
     margin-top: 10px;
 }
 
-
-.table th {
-    font-size: 13px;
-}
-
 .edit-btn {
     width: 60px;
     height: 25px;
@@ -218,12 +205,9 @@
     background-color: grey;
 }
 
-tbody{
-    margin-top: 25px;
-}
-
 .view-container {
-    width: 900px;
+    width: 800px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -231,7 +215,64 @@ tbody{
     border-radius: 10px;
 }
 
+.second {
+    height: 600px;
+}
+
+
+.employee-card {
+    width: 380px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.employee-image {
+    width: 40%;
+}
+
+.profile.image {
+    width: 50px;
+    height: 50px;
+    border: 1px solid red;
+}
+
+.card-btn {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+    margin-top: 7px;
+}
+
+#view-tag {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.details {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: 10px;
+}
+
+.details p {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 5px;
+}
+
 /* search form section */
+.search {
+    height: 20%;
+}
+
 
 .search-bar {
     display: flex;
