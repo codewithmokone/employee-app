@@ -1,4 +1,6 @@
+import { Box, Button } from '@mui/material';
 import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Search = ({ onSearch }) => {
   const [clear, setClear] = useState(false);
@@ -17,23 +19,18 @@ const Search = ({ onSearch }) => {
   const handleClear = () => {
     setClear(false);
     setSearchBar('');
-      // return (
-      //   <>
-      //   <tbody id='view-tag'>
-      //   <View employees={employees} deleteEmployee={deleteEmployee} handleEditSubmit={handleEditSubmit} handleSearch={handleSearch}/>
-      //   </tbody>
-      //   </>
-      // )
   }
 
   return (
-    <div className='search-bar'>
-      <input type="text" name='searchInput' id="searchInput" value={searchBar} onChange={(e) => setSearchBar(e.target.value)} placeholder='Search employee'/>
-      <button className="btn-search" onClick={handleSearch}>Search</button>
+    <Box 
+    sx={{width:450}}
+    className='search-bar'>
+      <input type="text" name='searchInput' id="searchInput" value={searchBar} onChange={(e) => setSearchBar(e.target.value)} placeholder=' Search employee'/>
+      <Button variant='contained' sx={{color:'white', width: 30, height:30, marginLeft:1}}  onClick={handleSearch}><SearchIcon/></Button>
       {clear && (
               <button className='btn-viewall' onClick={handleClear}>Clear</button>
             )}
-    </div>
+    </Box>
   );
 };
 
